@@ -29,11 +29,12 @@ function dispatchErrorProduction(error, req, res) {
 
 //Solution 1
 function handleMongoDBDuplicate(err) {
+  console.log(err);
   let errorMessageDuplicateKey = Object.keys(err.keyValue)[0];
   let errorMessageDuplicateValue = Object.values(err.keyValue)[0];
 
-  console.log(errorMessageDuplicateKey);
-  console.log(errorMessageDuplicateValue);
+  // console.log(errorMessageDuplicateKey);
+  // console.log(errorMessageDuplicateValue);
 
   //we have parse some data in here
   let message = `${errorMessageDuplicateKey} - ${errorMessageDuplicateValue} is taken please choose another one`;
@@ -89,8 +90,8 @@ module.exports = (err, req, res, next) => {
     error = handleMongoDBDuplicate(error);
   }
 
-  // console.log("7");
-  // console.log(error);
+  console.log("7");
+  console.log(error);
   if (process.env.NODE_ENV === "development") {
     dispatchErrorDevelopment(error, req, res);
   } else {
